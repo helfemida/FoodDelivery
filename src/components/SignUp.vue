@@ -10,15 +10,15 @@
                 <div class="below__userinfo">
                     <div class="userinfo">
                         <p class="userinfo__text">NAME</p>
-                        <input type="text" v-model="name" @click="press" placeholder="John Doe"  class="userinfo__input">
+                        <input type="text" v-model="signUpData.name" @click="press" placeholder="John Doe"  class="userinfo__input">
                     </div>
                       <div class="userinfo" id="us2">
                         <p class="userinfo__text">EMAIL</p>
-                        <input type="phone" v-model="email" @click="press" placeholder="example@gmail.com" class="userinfo__input">
+                        <input type="phone" v-model="signUpData.email" @click="press" placeholder="example@gmail.com" class="userinfo__input">
                     </div>
                     <div class="userinfo" id="us2">
                         <p class="userinfo__text">PASSWORD</p>
-                        <input type="password" v-model="password" @click="press"  placeholder="* * * * * * * * * * * * * * * *" class="userinfo__input">
+                        <input type="password" v-model="signUpData.password" @click="press"  placeholder="* * * * * * * * * * * * * * * *" class="userinfo__input">
                     </div>
                     <div class="userinfo" id="us2">
                         <p class="userinfo__text">RE-TYPE PASSWORD</p>
@@ -176,34 +176,35 @@ import axios from 'axios'
 export default {
 
     data(){
-        return{
+        return {
             signUpData: {
                 name: '',
                 email: '',
                 password: '',
-                error: ''
             }
            
         };
     },
     methods:{
         login(){
-            if (!this.signUpData.email || !this.signUpData.password || !this.signUpData.name || !this.signUpData.repassword) {
-                this.error = 'Name, Email, and password are required.';
-                return;
-            }
-            if (this.signUpData.password.length < 8 || this.signUpData.password.length > 25) {
-                this.error = 'Password must be between 8 and 25 characters.';
-                return;
-            }
-            if(this.signUpData.password != this.signUpData.repassword){
-                this.error = "Passwords do not match.";
-                return;
-            }
+            console.log(this.signUpData);
+            // if (!this.signUpData.email || !this.signUpData.password || !this.signUpData.name || !this.signUpData.repassword) {
+            //     this.error = 'Name, Email, and password are required.';
+            //     return;
+            // }
+            // if (this.signUpData.password.length < 8 || this.signUpData.password.length > 25) {
+            //     this.error = 'Password must be between 8 and 25 characters.';
+            //     return;
+            // }
+            // if(this.signUpData.password != this.signUpData.repassword){
+            //     this.error = "Passwords do not match.";
+            //     return;
+            // }
             axios.post('http://localhost:8090/signUp', this.signUpData)
             .then(response => {
                 console.log(response.data);
                 console.log("Success");
+                
                 this.$router.push('/location');
             })
             .catch(error => {

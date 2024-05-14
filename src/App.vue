@@ -10,14 +10,14 @@
 
 }
 </style>
+
 <script>
 import Login from './components/Login.vue'
 import SignUp from './components/SignUp.vue'
 
-
 export default {
   data(){
-  
+    return null;
   },
   components:{
     SignUp,Login

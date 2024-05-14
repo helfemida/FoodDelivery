@@ -11,11 +11,11 @@
                 <div class="below__userinfo">
                     <div class="userinfo">
                         <p class="userinfo__text">EMAIL</p>
-                        <input type="email" @click="press" placeholder="example@gmail.com" v-model="email" class="userinfo__input">
+                        <input type="email" @click="press" placeholder="example@gmail.com" v-model="loginData.email" class="userinfo__input">
                     </div>
                       <div class="userinfo" id="us2">
                         <p class="userinfo__text">PASSWORD</p>
-                        <input type="password" @click="press" v-model="password" placeholder="* * * * * * * * * * * * * * * *" class="userinfo__input">
+                        <input type="password" @click="press" v-model="loginData.password" placeholder="* * * * * * * * * * * * * * * *" class="userinfo__input">
                     </div>
                      
                      <div class="functions">
@@ -173,10 +173,10 @@
 
 </style>
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
-    data(){
+    data() {
         return{
             loginData: {
                 email: '',
@@ -187,26 +187,17 @@ export default {
     },
     methods:{
        login(){
-        if (!this.email || !this.password) {
-            this.error = 'Email and password are required.';
-            return;
-        }
-        else if (this.password.length < 8 || this.password.length > 25) {
-            this.error = 'Password must be between 8 and 25 characters.';
-            return;
-        }
-        else {
-            axios.post('/login', this.loginData)
+        console.log("CHECK");
+        
+            axios.post('http://localhost:8090/login', this.loginData)
                 .then(response => {
                     console.log(response.data);
-                    this.$router.push('/location');
+                    // this.$router.push('/location');
                     console.log("Success");
                 })
                 .catch(error => {
                 console.error('Ошибка при входе:', error);
             });
-        }
-        
 
        },
        press(){

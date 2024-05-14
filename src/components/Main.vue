@@ -15,7 +15,7 @@
                     <div class="img1">
                         <img :src="Corz" alt="">
                         </div>
-                    <span >0</span>
+                    <span>0</span>
             </div>
         </header>
         <div class="greete">
@@ -213,8 +213,7 @@ export default {
                 "All","Hot dog", "Burger","Chicken","Drink"
             ],
             Menu,Corz,Rest1,Star,Time,Del,
-            rests: [
-                {   img: Rest1,
+            rests: [ {   img: Rest1,
                     name: 'Rose Garden Restaurant',
                     catalog: ['Burger - ','Chicken - ','Riche - ','Wings'],
                     rate: '4.7',
