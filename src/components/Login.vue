@@ -173,34 +173,46 @@
 
 </style>
 <script>
+import axios from 'axios';
 
 export default {
     data(){
         return{
-            email: '',
-            password: '',
+            loginData: {
+                email: '',
+                password: '',
+            },
             error: ''
         };
     },
     methods:{
        login(){
         if (!this.email || !this.password) {
-        this.error = 'Email and password are required.';
-        return;
-      }
-      if (this.password.length < 8 || this.password.length > 25) {
-        this.error = 'Password must be between 8 and 25 characters.';
-        return;
-      }
-       this.$router.push('/location');
-      console.log("Success");
+            this.error = 'Email and password are required.';
+            return;
+        }
+        else if (this.password.length < 8 || this.password.length > 25) {
+            this.error = 'Password must be between 8 and 25 characters.';
+            return;
+        }
+        else {
+            axios.post('/login', this.loginData)
+                .then(response => {
+                    console.log(response.data);
+                    this.$router.push('/location');
+                    console.log("Success");
+                })
+                .catch(error => {
+                console.error('Ошибка при входе:', error);
+            });
+        }
+        
+
        },
        press(){
         this.error = '';
        },
        
-        
-  
     }
 }
 </script>
